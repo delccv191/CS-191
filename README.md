@@ -7,7 +7,9 @@ This is a course requirement for CS191/192 Software Engineering Course of the De
 <Name of Your Group. Be creative.> 
 
 
-*Caingat, Deanne
-*Cruz, Eunice Angel D.
-*Velasco, Lois
+Caingat, Deanne
+
+Cruz, Eunice Angel D.
+
+Velasco, Lois
 
