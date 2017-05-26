@@ -1,0 +1,670 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+#ALL SCREENS HERE
+ScreenManagement:
+    transition: FadeTransition()
+    StartUPScreen:
+    MainScreen:
+    AddExpenseScreen:
+    CreateAccountScreen:
+
+<NumberInput@TextInput>:
+    input_type: 'number'
+    focus: True
+    multiline: False
+    id: Food_amt
+    hint_text: 'Enter Amount'
+    font_size: root.height*0.5
+
+<MyLabel4@Label>:
+    size_hint_y: 0.2
+    color: 0.5,0,0,1
+    halign: 'center'
+
+<MyBoxLayout@BoxLayout>:
+    bcolor: 0.7875, 0.74166, 0.6666, 1
+    canvas.before:
+        Color:
+            rgba: self.bcolor
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<CustomLabel3@Label>:
+    bcolor: 0.5,0,0,1
+    font_name: 'varsity_regular.ttf'
+    pos: self.pos
+    font_size: self.size[1]*0.8
+    color: 0,0,0,1
+    canvas.after:
+        Color:
+            rgba: 0.5,0,0,1
+        Rectangle:
+            pos: self.pos
+            size: self.size[0], self.size[1]*0.1
+
+<CustomButton1@Button>:
+    #background_normal: ""
+    background_color: (0.5, 0.0, 0.0, 1.0)
+
+<CustomLabel@Label>:
+    bcolor: 0.7875, 0.74166, 0.6666, 1
+    canvas.before:
+        Color:
+            rgba: self.bcolor
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    canvas.after:
+        Color:
+            rgba: 0.5, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size[0], self.size[1]*0.1
+    color: 0,0,0,1
+    font_name: 'varsity_regular.ttf'
+    pos: self.pos
+
+<CustomLabel2@Label>:
+    bcolor: 0.5,0,0,1
+    canvas.before:
+        Color:
+            rgba: self.bcolor
+        Rectangle:
+            pos: self.pos[0], self.pos[1]
+            size: self.size
+
+<StartUPScreen>:
+    canvas.before:
+        Rectangle:
+            source: 'iskoins1.jpg'
+            pos: self.pos
+            size: self.size
+    name: 'StartUP'
+    RelativeLayout:
+        size_hint: 0.6,0.1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.23}
+        BoxLayout:
+            orientation: 'vertical'
+            CustomButton1:
+                text: 'Open Account'
+                on_press: root.manager.current = 'Main'
+            CustomButton1:
+                text: 'About'
+                on_press: 
+                    root.aboutPopUP()
+
+<MyLabel@Label>:
+    color: 0,0,0,1
+    valign: 'middle'
+    size: self.texture_size
+
+<MyLabel2@Label>:
+    color: 0,0,0,1
+    text: root.text
+    valign: 'bottom'
+    #halign: 'center'
+    size_hint:1,None
+    text_size: root.width, None
+    pos: self.pos
+    size: self.texture_size[0]*0.1,self.texture_size[0]*0.075,
+    canvas.before:
+        Color: 
+            rgba: 0.8625, 0.8458, 0.84166, 1
+        Rectangle:
+            source: root.image
+            pos: self.pos
+            size: self.width*0.075,self.size[0]*.075,
+
+<MyLabel5@Label>:
+    color: 0,0,0,1
+    text: root.text
+    valign: 'bottom'
+    #halign: 'center'
+    size_hint:1,None
+    text_size: root.width, None
+    pos: self.pos
+    size: self.texture_size
+
+<MyBoxLayout1@BoxLayout>:
+    size_hint_x: 0.9
+    orientation: 'vertical'
+    valign: 'center'
+    halign: 'middle'
+    bcolor: 0.8625, 0.8458, 0.84166, 1
+    canvas.before:
+        Color:
+            rgba: self.bcolor
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<MyLabel3@Label>:
+    color: 0.5,0,0,1
+    text: root.text
+    valign: 'bottom'
+    #halign: 'center'
+    text_size: root.width, None
+    pos: self.pos
+    size: self.texture_size
+    canvas.before:
+        Color: 
+            rgba: 0.8625, 0.8458, 0.84166, 1
+        Rectangle:
+            source: root.image
+            #pos: self.pos[0], self.pos[1]+self.height*0.01
+            pos: self.pos[0], self.pos[1]+self.height*0.01
+            size: self.width*0.1,self.size[0]*.15,
+
+
+<MyCanvas1@Label>:
+    bcolor: (1,0,0,1)  #edit to change graph color #RED
+    bcolor2: (1,1,1,1) if root.percentage<1 else (0.5,0,0,1) #edit to change graph color #GRAY
+    color: 0.5,0,0,1
+    valign: 'middle'
+    size_hint:1,None
+    text_size: root.width, None
+    size: self.texture_size[0]*0.1,self.texture_size[0]*0.075,
+    canvas.before:
+        Color:
+            rgba: root.bcolor2
+        Rectangle:
+            pos: self.pos
+            size: self.width,self.size[0]*.05, #edit to resize graph size (width, height)
+    canvas:
+        Color:
+            rgba: root.bcolor
+        Rectangle:
+            pos: self.pos
+            size: (self.width*root.percentage) if root.percentage<1 else (self.width*(1/root.percentage)),self.size[0]*.05, #edit to resize graph size (width, height)
+    
+<MyGrid@GridLayout>:
+    padding: 10,10,10,0
+    rows: 2
+    cols: 1
+    size_hint:1,None
+    height: self.minimum_height
+
+
+<MainScreen>:
+    name: 'Main' 
+    canvas.before:
+        Color:
+            rgba: 1,1,1,1
+        Rectangle:
+            pos: self.pos
+            size: self.size           
+    BoxLayout:
+        spacing: '20dp'
+        orientation: 'vertical'
+        GridLayout:
+            cols: 3
+            size_hint_y:0.17
+            canvas.after:
+                Color:
+                    rgba: 0.5,0,0,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size[0], self.size[1]*0.1
+            CustomLabel:
+                text: "ISKOINS"
+                font_size: self.size[1]*0.8
+                size_hint_x: 0.70
+            Button:
+                size_hint_x: 0.15
+                background_color: 0.7875, 0.74166, 0.6666, 1
+                background_normal: ''
+                on_press:
+                    root.addExpenseScreen()
+                Image:
+                    source: 'Wallet.png'
+                    pos: self.parent.pos
+                    size: self.parent.size
+            Button:
+                size_hint_x: 0.15
+                background_color: 0.7875, 0.74166, 0.6666, 1
+                background_normal: ''
+                on_press:
+                    root.showAccountMENU()
+                Image:
+                    source: 'menu.png'
+                    pos: self.parent.pos
+                    size: self.parent.size
+        AnchorLayout:
+            anchor_x: 'center'
+            size_hint_y: 0.4
+            MyBoxLayout1:
+                CustomLabel:
+                    text: "ACCOUNT DETAILS"
+                    font_size: self.size[1]*0.5
+                    size_hint_y: 0.5
+                BoxLayout:
+                    orientation: 'horizontal'
+                    padding: 10,10,10,10
+                    BoxLayout:
+                        orientation: 'vertical'
+                        padding: 10,0,10,0
+                        MyLabel:
+                            text: "Initial Amount:"
+                        MyLabel:
+                            text: "Total Expense:"
+                        MyLabel:
+                            text: "Remaining Balance:"
+                    BoxLayout:
+                        orientation: 'vertical'
+                        padding: 10,0,10,0
+                        MyLabel:
+                            text: "P"+str("{0:.2f}".format(root.labelText1))
+                        MyLabel:
+                            text: "P"+str("{0:.2f}".format(root.labelText2))
+                        MyLabel:
+                            text: "P"+str("{0:.2f}".format(root.labelText3))
+        AnchorLayout:
+            anchor_x: 'center'
+            MyBoxLayout1:
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: 0.1
+                    CustomLabel:
+                        text: "EXPENSES"
+                        font_size: self.size[1]*0.5
+                    #Button:    
+                        #background_normal: 'wallet2.png'
+                    #    size_hint_x: 0.2
+                    #    text: ""
+                    #    on_press: root.addExpenseScreen()  
+                    #    Image:
+                    #        pos:self.parent.pos
+                    #        size: self.parent.size
+                    #        source: 'wallet2.png'                     
+                ScrollView:
+                    size_hint_y: 0.7 
+                    GridLayout:
+                        size_hint: 1,None
+                        height: self.minimum_height
+                        cols: 1
+                        rows: 12
+                        MyGrid:
+                            MyLabel2:
+                                image: 'Food.png'
+                                text: '       Food'
+                            MyGrid:
+                                padding: 30,0,30,0
+                                MyLabel5:
+                                    #text: root.expense1
+                                    text: 'Budget Allocation: P '+str("{0:.2f}".format(root.budget1))+'\nAmount Used: P '+str("{0:.2f}".format(root.expense1))
+                                MyCanvas1:
+                                    text: ' '
+                                    percentage: root.expense1/root.budget1 if root.budget1!=0 else root.expense1/1.0
+                                    #percentage: root.percent1
+                        MyGrid:
+                            MyLabel2:
+                                image: 'Transportation.png'
+                                text: '       Transportation'
+                            MyGrid:
+                                padding: 30,0,30,0
+                                MyLabel5:
+                                    #text: root.expense2
+                                    text: 'Budget Allocation: P '+str("{0:.2f}".format(root.budget2))+'\nAmount Used: P '+str("{0:.2f}".format(root.expense2))
+                                MyCanvas1:
+                                    text: ' '
+                                    percentage: root.expense2/root.budget2 if root.budget2!=0 else root.expense2/1.0
+                                    #percentage: root.percentage2
+                        MyGrid:
+                            MyLabel2:
+                                image: 'Groceries.png'
+                                text: '       Groceries'
+                            MyGrid:
+                                padding: 30,0,30,0
+                                MyLabel5:
+                                    #text: root.expense3
+                                    text: 'Budget Allocation: P '+str("{0:.2f}".format(root.budget3))+'\nAmount Used: P '+str("{0:.2f}".format(root.expense3))
+                                MyCanvas1:
+                                    text: ' '
+                                    percentage: root.expense3/root.budget3 if root.budget3!=0 else root.expense3/1.0
+                                    #percentage: root.percentage2
+                        MyGrid:
+                            MyLabel2:
+                                image: 'Supplies.png'
+                                text: '       School Supplies'
+                            MyGrid:
+                                padding: 30,0,30,0
+                                MyLabel5:
+                                    #text: root.expense4
+                                    text: 'Budget Allocation: P '+str("{0:.2f}".format(root.budget4))+'\nAmount Used: P '+str("{0:.2f}".format(root.expense4))
+                                MyCanvas1:
+                                    text: ' '
+                                    percentage: root.expense4/root.budget4 if root.budget4!=0 else root.expense4/1.0
+                                    #percentage: root.percentage2
+                        MyGrid:
+                            MyLabel2:
+                                image: 'Health.png'
+                                text: '       Health'
+                            MyGrid:
+                                padding: 30,0,30,0
+                                MyLabel5:
+                                    #text: root.expense5
+                                    text: 'Budget Allocation: P '+str("{0:.2f}".format(root.budget5))+'\nAmount Used: P '+str("{0:.2f}".format(root.expense5))
+                                MyCanvas1:
+                                    text: ' '
+                                    percentage: root.expense5/root.budget5 if root.budget5!=0 else root.expense5/1.0
+                                    #percentage: root.percentage2
+                        MyGrid:
+                            MyLabel2:
+                                image: 'Laundry.png'
+                                text: '       Laundry'
+                            MyGrid:
+                                padding: 30,0,30,0
+                                MyLabel5:
+                                    #text: root.expense6
+                                    text: 'Budget Allocation: P '+str("{0:.2f}".format(root.budget6))+'\nAmount Used: P '+str("{0:.2f}".format(root.expense6))
+                                MyCanvas1:
+                                    text: ' '
+                                    percentage: root.expense6/root.budget6 if root.budget6!=0 else root.expense6/1.0
+                                    #percentage: root.percentage2
+                        MyGrid:
+                            MyLabel2:
+                                image: 'Dorm Fee.png'
+                                text: '       Dormitory Fee'
+                            MyGrid:
+                                padding: 30,0,30,0
+                                MyLabel5:
+                                    #text: root.expense7
+                                    text: 'Budget Allocation: P '+str("{0:.2f}".format(root.budget7))+'\nAmount Used: P '+str("{0:.2f}".format(root.expense7))
+                                MyCanvas1:
+                                    text: ' '
+                                    percentage: root.expense7/root.budget7 if root.budget7!=0 else root.expense7/1.0
+                                    #percentage: root.percentage
+                        MyGrid:
+                            MyLabel2:
+                                image: 'Savings.png'
+                                text: '       Savings'
+                            MyGrid:
+                                padding: 30,0,30,0
+                                MyLabel5:
+                                    #text: root.expense8
+                                    text: 'Budget Allocation: P '+str("{0:.2f}".format(root.budget8))+'\nAmount Used: P '+str("{0:.2f}".format(root.expense8))
+                                MyCanvas1:
+                                    text: ' '
+                                    percentage: root.expense8/root.budget8 if root.budget8!=0 else root.expense8/1.0
+                                    #percentage: root.percentage2
+                        MyGrid:
+                            MyLabel2:
+                                text: ''
+        Label:
+            text: ""
+            size_hint_y:0.05  
+
+<CreateAccountScreen>:
+    name: 'CreateAccount'
+    BoxLayout:
+        spacing: '20dp'
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 1,1,1,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        MyBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y:0.17
+            canvas.after:
+                Color:
+                    rgba: 0.5,0,0,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size[0], self.size[1]*0.1
+            AnchorLayout:
+                size_hint_x: 0.4
+                anchor_x: 'center'
+                Button:
+                    text: "Back"
+                    size_hint_x:0.8
+                    size_hint_y:0.6
+                    on_press:
+                        root.manager.current = 'Main'
+            CustomLabel:
+                font_size: self.size[1]*0.6
+                text: root.account
+            
+
+        AnchorLayout:
+            anchor_x: 'center'
+            size_hint_y: 0.35
+            MyBoxLayout1:
+                padding: 10,10,10,10
+                orientation: 'vertical'
+                GridLayout:
+                    spacing: '10dp'
+                    cols: 2 
+                    MyLabel3:
+                        text: "Name"
+                    TextInput:      
+                        focus: True
+                        multiline: False
+                        id: username
+                        hint_text: 'Enter name'
+                        font_size: 12
+                    MyLabel3:
+                        text: "Initial Amount"
+                    NumberInput:      
+                        id: initial_amt
+                    MyLabel3:
+                        text: "Time Frame"
+                    Spinner:
+                        id: duration
+                        text: "Weekly"
+                        values: ["Weekly", "Monthly"]
+                        size: 100,40
+                    
+        AnchorLayout:
+            anchor_x: 'center'
+            MyBoxLayout1:
+                orientation: 'vertical'
+                BoxLayout:
+                    orientation: 'vertical'
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y:0.15
+                        AnchorLayout:
+                            anchor_x: 'center'
+                            CustomLabel2:
+                                text: "Budget Allocation"
+                                size_hint_y:0.6
+                        Label:
+                            size_hint: (0.4,0.05)
+                            text: ""
+                    GridLayout:
+                        spacing: '5dp'
+                        padding: 10,0,10,10
+                        cols: 2 
+                        MyLabel3:
+                            image: "Food.png"
+                            text: "     Food"
+                        NumberInput:
+                            id: Food_amt
+                        MyLabel3:
+                            image: "Transportation.png"
+                            text: "     Transportation"
+                        NumberInput:
+                            id: Transportation_amt
+                        MyLabel3:
+                            image: "Groceries.png"
+                            text: "     Groceries"
+                        NumberInput:
+                            id: Groceries_amt
+                        MyLabel3:
+                            image: "Supplies.png"
+                            text: "     School Supplies"
+                        NumberInput:
+                            id: Supplies_amt
+                        MyLabel3:
+                            image: "Health.png"
+                            text: "     Health"
+                        NumberInput:
+                            id: Health_amt
+                        MyLabel3:
+                            image: "Laundry.png"
+                            text: "     Laundry"
+                        NumberInput:
+                            id: Laundry_amt
+                        MyLabel3:
+                            image: "Dorm Fee.png"
+                            text: "     Dorm Fee"
+                        NumberInput:
+                            id: DormFee_amt
+                        MyLabel3:
+                            image: "Savings.png"
+                            text: "     Savings"  
+                        NumberInput:
+                            id: Savings_amt   
+                        Label:
+                            text: ""     
+                        Button:
+                            text: "Done"
+                            on_press:
+                                if root.account == "NEW ACCOUNT": root.CreateAccount(duration.text, username.text,initial_amt.text,Food_amt.text,Transportation_amt.text,Groceries_amt.text,Supplies_amt.text,Health_amt.text,Laundry_amt.text,DormFee_amt.text,Savings_amt.text)
+                                else: root.EditAccount(duration.text, username.text,initial_amt.text,Food_amt.text,Transportation_amt.text,Groceries_amt.text,Supplies_amt.text,Health_amt.text,Laundry_amt.text,DormFee_amt.text,Savings_amt.text)
+        Label:
+            text: ""
+            size_hint_y: 0.03 
+
+   
+
+
+<AddExpenseScreen>:
+    name: 'AddExpense'
+    canvas.before:
+        Color:
+            rgba: 1,1,1,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        padding: root.width*0.15,root.height*0.17,root.width*0.15,root.height*0.22
+        CustomLabel3:
+            text: "EXPENSES"
+            size_hint_y: 0.2
+        GridLayout:
+            padding: 10, 10, 10, 20
+            spacing: '5dp'
+            rows: 3
+            cols: 3
+            BoxLayout: 
+                orientation: 'vertical'
+                Button:
+                    canvas.after:
+                        Rectangle:
+                            source: 'Food.png'
+                            pos: self.pos
+                            size: self.size
+                    on_press:
+                        root.get_expense_input("Food")
+                MyLabel4:
+                    text: "Food"
+                    #size_hint_y: 0.2
+            BoxLayout: 
+                orientation: 'vertical'
+                Button:
+                    canvas.after:
+                        Rectangle:
+                            source: 'Transportation.png'
+                            pos: self.pos
+                            size: self.size
+                    on_press:
+                        root.get_expense_input("Transportation")
+                MyLabel4:
+                    text: "Transportation"
+                    #size_hint_y: 0.2
+            BoxLayout: 
+                orientation: 'vertical'
+                Button:
+                    canvas.after:
+                        Rectangle:
+                            source: 'Groceries.png'
+                            pos: self.pos
+                            size: self.size
+                    on_press:
+                        root.get_expense_input("Groceries")
+                MyLabel4:
+                    text: "Groceries"
+                    size_hint_y: 0.2
+            BoxLayout: 
+                orientation: 'vertical'
+                Button:
+                    canvas.after:
+                        Rectangle:
+                            source: 'Supplies.png'
+                            pos: self.pos
+                            size: self.size
+                    on_press:
+                        root.get_expense_input("Supplies")
+                MyLabel4:
+                    text: "School Supplies"
+                    #size_hint_y: 0.2
+            BoxLayout: 
+                orientation: 'vertical'
+                Button:
+                    canvas.after:
+                        Rectangle:
+                            source: 'Health.png'
+                            pos: self.pos
+                            size: self.size
+                    on_press:
+                        root.get_expense_input("Health")
+                MyLabel4:
+                    text: "Health"
+                    #size_hint_y: 0.2
+            BoxLayout: 
+                orientation: 'vertical'
+                Button:
+                    canvas.after:
+                        Rectangle:
+                            source: 'Laundry.png'
+                            pos: self.pos
+                            size: self.size
+                    on_press:
+                        root.get_expense_input("Laundry")
+                MyLabel4:
+                    text: "Laundry"
+                    #size_hint_y: 0.2
+            BoxLayout: 
+                orientation: 'vertical'
+                Button:
+                    canvas.after:
+                        Rectangle:
+                            source: 'Dorm Fee.png'
+                            pos: self.pos
+                            size: self.size
+                    on_press:
+                        root.get_expense_input("Dorm Fee")
+                MyLabel4:
+                    text: "Dorm"
+                    #size_hint_y: 0.2
+            BoxLayout: 
+                orientation: 'vertical'
+                halign: 'right'
+                Button:
+                    canvas.after:
+                        Rectangle:
+                            source: 'Savings.png'
+                            pos: self.pos
+                            size: self.size
+                    on_press:
+                        root.get_expense_input("Savings")
+                MyLabel4:
+                    text: "Savings"
+            
+        AnchorLayout:
+            anchor_x: 'center'
+            size_hint_y: 0.15
+            Button:
+                color: 1,1,1,1
+                background_normal: ""
+                background_color: 0.5,0,0,1
+                text: "BACK"
+                size_hint_x: 0.5
+                on_press:
+                    root.setText()
